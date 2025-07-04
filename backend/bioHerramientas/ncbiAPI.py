@@ -24,13 +24,14 @@ class API_NCBI:
         self.respuesta = None
         
     
-    def definir_parametros(self, bbdd, id, modo, maximoRespuesta, tipo):
+    def definir_parametros(self, bbdd, id, modo, maximoRespuesta, tipo, tipoArchivo = None):
         match tipo:
             case "EFetch":
                 parametros = {
                     "db": bbdd,
                     "id": id,
                     "retmode": modo,
+                    "rettype" : tipoArchivo,
                     "retmax": maximoRespuesta
                 }
             case "ESearch":
