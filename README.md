@@ -15,6 +15,7 @@
 
 ---
 
+```
 ## Estructura de la aplicación Web:
 BioExplorer/
 ├── backend/
@@ -39,3 +40,4 @@ BioExplorer/
 ├── requirements.txt            # Dependencias Python
 ├── README.md                   # Instrucciones del proyecto
 └── .gitignore                  # Ignorar venvs, cachés, etc.
+```
