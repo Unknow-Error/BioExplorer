@@ -71,7 +71,12 @@ class API_NCBI:
         
         self.modo = modo
         self.definir_parametros("nuccore", consulta, modo, maximoRespuesta, "ESearch")
-        self.realizar_busqueda(URL_ESearch)
+        datos_ids_gen = self.realizar_busqueda(URL_ESearch)
+        
+        ids_gen = jp.parse("$..idlist[*]").find(datos_ids_gen)
+        ids_gen = [id.value for id in ids_gen]
+        
+        return ids_gen
         
     def buscar_proteina(consulta, modo, maximoRespuesta):
         """
@@ -81,5 +86,8 @@ class API_NCBI:
         
         self.modo = modo
         self.definir_parametros("protein", consulta, modo, maximoRespuesta, "ESearch")
-        self.realizar_busqueda_ESearch(URL_ESearch)        
+        datos_ids_proteina = self.realizar_busqueda_ESearch(URL_ESearch)        
+        
+        ids_proteina = jp.parse("$..idlist[*]").find(datos_ids_proteina)
+        ids_proteina = [id.value for id in ids_proteina]
         
