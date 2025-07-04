@@ -20,12 +20,8 @@ class API_NCBI:
         self.modo = None
         self.respuesta = None
         
-    def definir_parametros_ESearch(bbdd, consulta, modo, maximoRespuesta):
-        
-        self.parametros = parametros
-        return parametros
     
-    def definir_parametros(bbdd, id, modo, maximoRespuesta, tipo):
+    def definir_parametros(self, bbdd, id, modo, maximoRespuesta, tipo):
         match tipo:
             case "EFetch":
                 parametros = {
@@ -44,7 +40,7 @@ class API_NCBI:
         self.parametros = parametros
         return parametros
     
-    def realizar_busqueda(url, timeout=30):
+    def realizar_busqueda(self, url, timeout=30):
         try:
             respuesta = rq.get(url = url, params = self.parametros, timeout = timeout)
             if response.status_code == 200:
@@ -63,7 +59,7 @@ class API_NCBI:
         return datos
         
     
-    def buscar_gen(consulta, modo, maximoRespuesta):
+    def buscar_ids_gen(self, consulta, modo, maximoRespuesta):
         """
             Función para buscar un gen en la BBDD Nuccore de NCBI por su ID.
             Realiza una petición a Nuccore con E-search.
@@ -78,7 +74,7 @@ class API_NCBI:
         
         return ids_gen
         
-    def buscar_proteina(consulta, modo, maximoRespuesta):
+    def buscar_ids_proteina(self, consulta, modo, maximoRespuesta):
         """
             Función para buscar un gen en la BBDD Nuccore de NCBI por su ID.
             Realiza una petición a Protein con E-search.
@@ -90,4 +86,6 @@ class API_NCBI:
         
         ids_proteina = jp.parse("$..idlist[*]").find(datos_ids_proteina)
         ids_proteina = [id.value for id in ids_proteina]
+        
+        return ids_proteina
         
