@@ -17,6 +17,7 @@ class API_NCBI:
         self.consulta = consulta #  Si realiza la consulta por terminos
         self.codigoAcceso = codigoAcceso # Si realiza la consulta por el ID Access.
         self.parametros = parametros
+        self.modo = None
         self.respuesta = None
         
     def definir_parametros_ESearch(bbdd, consulta, modo, maximoRespuesta):
@@ -34,8 +35,10 @@ class API_NCBI:
             Función para buscar un gen en la BBDD Nuccore de NCBI por su ID.
             Realiza una petición a Nuccore con E-search.
         """
-        self.definir_parametros_ESearch("nuccore", consulta, modo, maximoRespuesta)
         
+        self.modo = modo
+        self.definir_parametros_ESearch("nuccore", consulta, modo, maximoRespuesta)
+                
         try:
             respuesta = rq.get(URL_ESearch, params = self.parametros, timeout = 30)
             if response.status_code == 200:
