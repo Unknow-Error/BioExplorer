@@ -1,0 +1,126 @@
+/* styles.css */
+
+/* Reseteo de márgenes y padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Configuración general */
+body {
+  font-family: 'Sans Serif', monospace;
+  background-color: #000000;
+  color: #00FF00; /* Verde Matrix */
+  line-height: 1.6;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* Barra Superior */
+.header {
+  background-color: #003300; /* Verde oscuro */
+  color: #00FF00;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header h1 {
+  font-size: 1.5rem;
+}
+
+.header nav ul {
+  list-style-type: none;
+}
+
+.header nav ul li {
+  display: inline;
+  margin-left: 20px;
+}
+
+.header nav ul li a {
+  color: #00FF00;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Contenedor principal con barra lateral */
+.main-content {
+  display: flex;
+  flex: 1;
+  padding: 20px;
+}
+
+/* Barra Lateral */
+.sidebar {
+  width: 250px;
+  background-color: #001a00;
+  padding: 20px;
+  border-right: 2px solid #00FF00;
+}
+
+.sidebar h2 {
+  color: #00FF00;
+  font-size: 1.2rem;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar ul li {
+  margin-bottom: 10px;
+}
+
+.sidebar ul li a {
+  color: #00FF00;
+  text-decoration: none;
+  font-size: 1rem;
+}
+
+.sidebar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Contenido principal */
+.content {
+  flex: 1;
+  padding: 20px;
+  color: #00FF00;
+}
+
+.content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+/* Pie de Página */
+.footer {
+  background-color: #003300;
+  color: #00FF00;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.8rem;
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+  .main-content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+}
