@@ -23,3 +23,8 @@ def buscar_transcrito(prompt):
 @click.argument("prompt")
 def buscar_proteina(prompt):
     print(ps.buscar_proteina(prompt))
+    
+    
+    
+if __name__ == "__main__":
+    cli()
