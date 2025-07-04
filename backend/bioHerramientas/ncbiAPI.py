@@ -21,14 +21,47 @@ class API_NCBI:
         self.respuesta = None
         
     def definir_parametros_ESearch(bbdd, consulta, modo, maximoRespuesta):
-        parametros = {
-            "db": bbdd,
-            "term": consulta,
-            "retmode": modo,
-            "retmax": maximoRespuesta
-        }
+        
         self.parametros = parametros
         return parametros
+    
+    def definir_parametros(bbdd, id, modo, maximoRespuesta, tipo):
+        match tipo:
+            case "EFetch":
+                parametros = {
+                    "db": bbdd,
+                    "id": id,
+                    "retmode": modo,
+                    "retmax": maximoRespuesta
+                }
+            case "ESearch":
+                parametros = {
+                    "db": bbdd,
+                    "term": consulta,
+                    "retmode": modo,
+                    "retmax": maximoRespuesta
+                }        
+        self.parametros = parametros
+        return parametros
+    
+    def realizar_busqueda(url, timeout=30):
+        try:
+            respuesta = rq.get(url = url, params = self.parametros, timeout = timeout)
+            if response.status_code == 200:
+                print("La consulta fue existosa")                   
+        except Exception:
+            print(f"Error en la consulta: {response.status_code}")
+        
+        if (self.modo == "json"):
+            datos = respuesta.json()
+        elif (self.modo == "xml"):
+            datos = respuesta.etree()
+        elif (self.modo == "text"):
+            datos = respuesta.text
+        
+        self.respuesta = datos
+        return datos
+        
     
     def buscar_gen(consulta, modo, maximoRespuesta):
         """
@@ -37,20 +70,16 @@ class API_NCBI:
         """
         
         self.modo = modo
-        self.definir_parametros_ESearch("nuccore", consulta, modo, maximoRespuesta)
-                
-        try:
-            respuesta = rq.get(URL_ESearch, params = self.parametros, timeout = 30)
-            if response.status_code == 200:
-                print("La consulta fue existosa")
+        self.definir_parametros("nuccore", consulta, modo, maximoRespuesta, "ESearch")
+        self.realizar_busqueda(URL_ESearch)
         
-            if (modo == "json"):
-                datos = respuesta.json()
-            elif (modo == "xml"):
-                datos = respuesta.etree()
-            elif (modo == "text"):
-                datos = respuesta.text
-                
-            self.respuesta = datos
-        except Exception:
-            print(f"Error en la consulta: {response.status_code}")
+    def buscar_proteina(consulta, modo, maximoRespuesta):
+        """
+            Función para buscar un gen en la BBDD Nuccore de NCBI por su ID.
+            Realiza una petición a Protein con E-search.
+        """
+        
+        self.modo = modo
+        self.definir_parametros("protein", consulta, modo, maximoRespuesta, "ESearch")
+        self.realizar_busqueda_ESearch(URL_ESearch)        
+        
