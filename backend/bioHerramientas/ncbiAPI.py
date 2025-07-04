@@ -1,9 +1,12 @@
 import requests as rq
 import jsonpath_ng.ext as jp
 import pandas as pd
-from lxml import etree
 import time 
 import json
+
+from Bio import SeqIO
+from lxml import etree
+from io import StringIO
 
 URL_ESearch = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi"
 URL_ESummary = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi"
