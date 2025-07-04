@@ -36,6 +36,12 @@ class API_NCBI:
                     "term": consulta,
                     "retmode": modo,
                     "retmax": maximoRespuesta
+                }
+            case "ESummary":
+                parametros = {
+                    "db" : bbdd,
+                    "id" : id,
+                    "retmode" : modo
                 }        
         self.parametros = parametros
         return parametros
